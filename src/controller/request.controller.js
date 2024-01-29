@@ -11,7 +11,10 @@ const createRequest = async (req, res) => {
       estado
     });
     console.log(req.body);
-    return res.json(newUser);
+    return res.status(200).jso({
+      message: 'Request creado existosamente',
+      request: newRequest
+    });
   } catch (error) {
     console.log(error);
   }
@@ -33,7 +36,7 @@ const getRequest = async (req, res) => {
     const request = await Request.findByPk(id);
     if (!request)
       return res.status(404).json({
-        response: `${id} no encontrado!`,
+        response: `request con ${id} no encontrado!`,
       });
     return res.status(200).json({
       message: "ok",
@@ -52,7 +55,7 @@ const setRequest = async (req, res) => {
     const requestFound = await Request.findByPk(id);
     if (!requestFound)
       return res.status(404).json({
-        message: "Request no encontada",
+        message: `Request con ${id} no encontrado`,
         status: 404,
       });
     console.log(requestFound);
